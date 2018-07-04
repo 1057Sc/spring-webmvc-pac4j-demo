@@ -80,14 +80,17 @@
     </bean>
 
     <bean id="casConfiguration" class="org.pac4j.cas.config.CasConfiguration">
-        <property name="loginUrl" value="https://10.1.3.193:8443/cas/login"/>
-        <property name="prefixUrl" value="https://10.1.3.193:8443/cas/"/>
+        <!--<property name="loginUrl" value="https://10.1.3.193:8443/cas/login"/>-->
+        <!--<property name="prefixUrl" value="https://10.1.3.193:8443/cas/"/>-->
+        <property name="loginUrl" value="https://192.168.112.130:8443/cas/login"/>
+        <property name="prefixUrl" value="https://192.168.112.130:8443/cas/"/>
     </bean>
 
     <bean id="casRestBasicAuthClient" class="org.pac4j.cas.client.rest.CasRestBasicAuthClient">
         <constructor-arg name="headerName" value="Authorization"/>
         <constructor-arg name="prefixHeader" value="Basic "/>
         <constructor-arg name="configuration" ref="casConfiguration"/>
+        <property name="authorizationGenerator" ref="dbAuthGenerator"/>
     </bean>
 
     <bean id="casClient" class="org.pac4j.cas.client.CasClient">
@@ -212,6 +215,7 @@
             <bean class="org.pac4j.springframework.web.SecurityInterceptor">
                 <constructor-arg name="config" ref="config"/>
                 <constructor-arg name="clients" value="CasRestBasicAuthClient"/>
+                <property name="securityLogic" ref="mySecurityLogic"/>
             </bean>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -270,5 +274,7 @@
     <bean id="dbAuthGenerator" class="org.pac4j.demo.spring.DBAuthGenerator">
         <property name="authorizeInfoMapper" ref="authorizeInfoMapper"/>
     </bean>
+
+    <bean id="mySecurityLogic" class="org.pac4j.demo.spring.MySecurityLogic"/>
 
 </beans>
