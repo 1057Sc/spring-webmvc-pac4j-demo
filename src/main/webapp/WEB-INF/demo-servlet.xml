@@ -82,8 +82,8 @@
     <bean id="casConfiguration" class="org.pac4j.cas.config.CasConfiguration">
         <!--<property name="loginUrl" value="https://10.1.3.193:8443/cas/login"/>-->
         <!--<property name="prefixUrl" value="https://10.1.3.193:8443/cas/"/>-->
-        <property name="loginUrl" value="https://192.168.112.130:8443/cas/login"/>
-        <property name="prefixUrl" value="https://192.168.112.130:8443/cas/"/>
+        <property name="loginUrl" value="https://127.0.0.1:8443/cas/login"/>
+        <property name="prefixUrl" value="https://127.0.0.1:8443/cas/"/>
     </bean>
 
     <bean id="casRestBasicAuthClient" class="org.pac4j.cas.client.rest.CasRestBasicAuthClient">
@@ -269,7 +269,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/shiro_test"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/shiro_test?useSSL=false"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
     </bean>
